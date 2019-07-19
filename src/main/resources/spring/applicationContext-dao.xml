@@ -8,8 +8,9 @@
             http://www.springframework.org/schema/context/spring-context.xsd">
     <!--整合mybatis-->
 
-    <!--1. 读取jdbc的properties配置文件-->
-    <context:property-placeholder location="classpath:properties/jdbc.properties"/>
+<!--    &lt;!&ndash;1. 读取jdbc的properties配置文件&ndash;&gt;-->
+<!--    <context:property-placeholder location="classpath:properties/jdbc.properties"/>-->
+
     <!--2. 配置数据库连接池 -->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="driverClass" value="${jdbc.driver}"/>
@@ -40,7 +41,7 @@
     <!--配置扫描Dao接口包，动态实现Dao接口，注入Spring容器中-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="sqlSessionFactoryBeanName" value="sessionFactory"/>
-        <property name="basePackage" value="stydy.SSM_Mooc_dianping.dao"/>
+        <property name="basePackage" value="study_ssm_dianping.dao"/>
     </bean>
 
 </beans>
