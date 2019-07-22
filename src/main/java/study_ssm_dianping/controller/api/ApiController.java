@@ -2,11 +2,14 @@ package study_ssm_dianping.controller.api;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import study_ssm_dianping.bean.BusinessList;
 import study_ssm_dianping.dto.AdDto;
+import study_ssm_dianping.service.AdService;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -22,37 +25,19 @@ import java.util.Map;
 @RequestMapping("/api")
 public class ApiController {
 
+    @Autowired
+    private AdService adService;
+
+    @Value("${ad.number}")
+    private int adNumber;
+
 //    @ResponseBody
     @RequestMapping(value = "/homead",method = RequestMethod.GET)
     public List<AdDto> homead() throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        String s = "[{\n" +
-                "\t\"title\": \"暑假6折\",\n" +
-                "\t\"img\": \"http://images2015.cnblogs.com/blog/138012/201610/138012-20161016191639092-2000037796.png\",\n" +
-                "\t\"link\": \"http://www.imooc.com/wap/index\"\n" +
-                "}, {\n" +
-                "\t\"title\": \"特价出国\",\n" +
-                "\t\"img\": \"http://images2015.cnblogs.com/blog/138012/201610/138012-20161016191648124-298129318.png\",\n" +
-                "\t\"link\": \"http://www.imooc.com/wap/index\"\n" +
-                "}, {\n" +
-                "\t\"title\": \"亮亮车\",\n" +
-                "\t\"img\": \"http://images2015.cnblogs.com/blog/138012/201610/138012-20161016191653983-1962772127.png\",\n" +
-                "\t\"link\": \"http://www.imooc.com/wap/index\"\n" +
-                "}, {\n" +
-                "\t\"title\": \"学钢琴\",\n" +
-                "\t\"img\": \"http://images2015.cnblogs.com/blog/138012/201610/138012-20161016191700420-1584459466.png\",\n" +
-                "\t\"link\": \"http://www.imooc.com/wap/index\"\n" +
-                "}, {\n" +
-                "\t\"title\": \"电影\",\n" +
-                "\t\"img\": \"http://images2015.cnblogs.com/blog/138012/201610/138012-20161016191706733-367929553.png\",\n" +
-                "\t\"link\": \"http://www.imooc.com/wap/index\"\n" +
-                "}, {\n" +
-                "\t\"title\": \"旅游热线\",\n" +
-                "\t\"img\": \"http://images2015.cnblogs.com/blog/138012/201610/138012-20161016191713186-495002222.png\",\n" +
-                "\t\"link\": \"http://www.imooc.com/wap/index\"\n" +
-                "}]";
-
-        return mapper.readValue(s, new TypeReference<List<AdDto>>(){});
+        AdDto adDto = new AdDto();
+        adDto.getPage().setPageNumber(adNumber);
+        List<AdDto> list = adService.adListInit(adDto);
+        return list;
     }
 
     //@ResponseBody

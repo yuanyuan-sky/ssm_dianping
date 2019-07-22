@@ -1,5 +1,5 @@
-<%@tag language="java" pageEncoding="UTF-8" %>
-<%@attribute type="study_ssm_dianping.bean.Page" name="page" required="true" %>
+<%@ tag language="java" pageEncoding="UTF-8" %>
+<%@ attribute type="study_ssm_dianping.bean.Page" name="page" required="true" %>
 <%@ attribute type="java.lang.String" name="jsMethodName" required="true" %>
 
 <script type="text/javascript">
@@ -8,7 +8,7 @@
         if(!rule.test(currentPage)) {
             currentPage = 1;
         }
-        eval("${jsMethodName}(currentPage)");
+        eval("adjs.${jsMethodName}(currentPage)");
     }
 
 </script>

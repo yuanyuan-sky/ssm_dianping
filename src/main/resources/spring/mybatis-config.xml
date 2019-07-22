@@ -20,4 +20,7 @@
         -->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
+    <plugins>
+        <plugin interceptor="study_ssm_dianping.dao.interceptor.PageInterceptor"></plugin>
+    </plugins>
 </configuration>

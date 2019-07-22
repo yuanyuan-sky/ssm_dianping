@@ -11,19 +11,17 @@
 		<link rel="stylesheet" type="text/css" href="${basePath}/css/pop.css"/>
 		<link rel="stylesheet" type="text/css" href="${basePath}/css/main.css"/>
 		<script type="text/javascript" src="${basePath}/js/common/jquery-1.8.3.js"></script>
-		<script type="text/javascript" src="${basePath}/js/common/common.js"></script>
-		<script type="text/javascript" src="${basePath}/js/content/adList.js"></script>
+		<script type="text/javascript" src="${basePath}/js/content/businessList.js"></script>
 	</head>
 	<body style="background: #e1e9eb;">
-		<form action="${basePath}/ad/search" id="mainForm" method="post">
-			<input type="hidden" id="id" name="id"/>
-			<input type="hidden" id="message" value="${pageCode.msg}"/>
+		<form action="${basePath}/businesses/search" id="mainForm" method="post">
+			<input type="hidden" name="_method" value="DELETE"/>
 			<input type="hidden" id="basePath" value="${basePath}"/>
 			<input type="hidden" name="page.currentPage" id="currentPage" value="1"/>
 			<div class="right">
-				<div class="current">当前位置：<a href="#">内容管理</a> &gt; 广告管理</div>
+				<div class="current">当前位置：<a href="#">内容管理</a> &gt; 商户管理</div>
 				<div class="rightCont">
-					<p class="g_title fix">广告列表</p>
+					<p class="g_title fix">商户列表</p>
 					<table class="tab1">
 						<tbody>
 							<tr>
@@ -32,10 +30,10 @@
 									<input name="title" id="title" value="${searchParam.title}" class="allInput" type="text"/>
 								</td>
 	                            <td style="text-align: right;" width="150">
-	                            	<input class="tabSub" value="查询" onclick="adjs.search('1');" type="button"/>&nbsp;&nbsp;&nbsp;&nbsp;
-<%--	                            	<t:auth url="/ad/addInit">--%>
-	                            		<input class="tabSub" value="添加" onclick="location.href='${basePath}/ad/addInit'" type="button"/>
-<%--	                            	</t:auth>--%>
+	                            	<input class="tabSub" value="查询" onclick="search('1');" type="button"/>&nbsp;&nbsp;&nbsp;&nbsp;
+	                            	<t:auth url="/businesses/addPage" method="GET">
+	                            		<input class="tabSub" value="添加" onclick="location.href='${basePath}/businesses/addPage'" type="button"/>
+	                            	</t:auth>
 	                            </td>
 	       					</tr>
 						</tbody>
@@ -46,29 +44,34 @@
 								<tr>
 								    <th>序号</th>
 								    <th>标题</th>
-								    <th>链接地址</th>
+								    <th>副标题</th>
+								    <th>城市</th>
+								    <th>类别</th>
 								    <th>操作</th>
 								</tr>
+								
 								<c:forEach items="${list}" var="item" varStatus="s">
 									<tr>
 										<td>${s.index + 1}</td>
 										<td>${item.title}</td>
-										<td>${item.link}</td>
+										<td>${item.subtitle}</td>
+										<td>${item.cityDic.name}</td>
+										<td>${item.categoryDic.name}</td>
 										<td>
-<%--											<t:auth url="/ad/modifyInit">--%>
-												<a href="javascript:void(0);" onclick="adjs.modifyInit('${item.id}')">修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
-<%--											</t:auth>--%>
-<%--											<t:auth url="/ad/remove">--%>
-												<a href="javascript:void(0);" onclick="adjs.remove('${item.id}')">删除</a>
-<%--											</t:auth>--%>
+											<t:auth url="/businesses/${item.id}" method="PUT">
+												<a href="javascript:void(0);" onclick="modifyInit('${item.id}')">修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
+											</t:auth>
+											<t:auth url="/businesses/${item.id}" method="DELETE">
+												<a href="javascript:void(0);" onclick="remove('${item.id}')">删除</a>
+											</t:auth>
 										</td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
+						
 						<!-- 分页 -->
 						<t:page jsMethodName="search" page="${searchParam.page}"></t:page>
-
 					</div>
 				</div>
 			</div>

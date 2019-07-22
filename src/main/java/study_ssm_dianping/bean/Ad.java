@@ -3,7 +3,7 @@ package study_ssm_dianping.bean;
 /**
  * Create By yuanyuan on 2019/7/15 13:16
  */
-public class Ad {
+public class Ad extends BaseBean {
 
     private Long id;
 

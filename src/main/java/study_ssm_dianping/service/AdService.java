@@ -1,6 +1,5 @@
 package study_ssm_dianping.service;
 
-import study_ssm_dianping.bean.Ad;
 import study_ssm_dianping.dto.AdDto;
 
 import java.util.List;
@@ -14,5 +13,22 @@ public interface AdService {
      */
     boolean add(AdDto adDto);
 
-    List<Ad> adListInit();
+
+    List<AdDto> adListInit(AdDto adDto);
+
+    boolean remove(int id);
+
+    /**
+     *修改页面初始化
+     * @param id   主键
+     * @return
+     */
+    AdDto modifyInit(int id);
+
+    /**
+     * 修改
+     * @param adDto
+     * @return
+     */
+    boolean modify(AdDto adDto);
 }

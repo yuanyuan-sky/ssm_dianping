@@ -10,10 +10,38 @@
         values (#{title}, #{imgFileName}, #{link}, #{weight});
     </insert>
 
-    <select id="adListInit" resultType="Ad">
-        select id,title,link
+    <select id="selectByPage" parameterType="Ad" resultType="Ad">
+        select id,title,img_file_name,link,weight
         from ad
-        order by weight desc ,id desc
+        <where>
+            <if test="title != null and title != ''">
+                title like concat('%',#{title},'%')
+            </if>
+        </where>
+        order by weight desc ,id
     </select>
-    
+
+    <delete id="remove">
+        delete
+        from ad
+        where id = #{id};
+    </delete>
+    <select id="selectById" resultType="Ad">
+        select id, title, img_file_name, link, weight
+        from ad
+        where id = #{id};
+    </select>
+
+    <update id="modify" parameterType="Ad">
+        update ad
+            <set>
+                title = #{title},
+                link = #{link},
+                weight = #{weight},
+                <if test="imgFileName != null and imgFileName != ''">
+                    img_file_name = #{imgFileName},
+                </if>
+            </set>
+        where id = #{id}
+    </update>
 </mapper>

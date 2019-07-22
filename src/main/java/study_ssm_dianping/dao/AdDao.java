@@ -8,5 +8,11 @@ public interface AdDao {
 
     int insert(Ad ad);
 
-    List<Ad> adListInit();
+    List<Ad> selectByPage(Ad condition);
+
+    int remove(int id);
+
+    Ad selectById(int id);
+
+    int modify(Ad ad);
 }

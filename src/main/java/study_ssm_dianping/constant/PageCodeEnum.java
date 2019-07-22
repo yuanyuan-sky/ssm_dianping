@@ -2,7 +2,11 @@ package study_ssm_dianping.constant;
 
 public enum PageCodeEnum {
     ADD_SUCCESS(1000, "新增成功"),
-    ADD_FAIL(1001, "新增失败"),;
+    ADD_FAIL(1001, "新增失败"),
+    DEL_SUCCESS(2000, "删除成功"),
+    DEL_FAIL(2001, "删除失败"),
+    MODIFY_SUCCESS(3000, "修改成功"),
+    MODIFY_FAIL(3001, "修改失败");
 
     private Integer code;
 

@@ -82,6 +82,10 @@
                             <h3 onclick="clickSubMenu(this,'${basePath}/ad/adListInit')"><a>广告管理</a></h3>
 <%--                            <h3 onclick="$('#mainPage').attr('src','${basePath}/demo/initModify');"><a>维护页面</a></h3>--%>
                         </div>
+                        <div class="ileft" id="menuDiv2">
+                            <h3 onclick="clickSubMenu(this,'${basePath}/ad/adListInit')"><a>商户管理</a></h3>
+                            <%--                            <h3 onclick="$('#mainPage').attr('src','${basePath}/demo/initModify');"><a>维护页面</a></h3>--%>
+                        </div>
                     </div>
                 </td>
                 <td width="7">
