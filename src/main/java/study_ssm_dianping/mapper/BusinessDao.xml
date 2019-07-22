@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="study_ssm_dianping.dao.BusinessDao">
+
+    <select id="searchByPage" parameterType="Business" resultType="Business">
+        select title,subtitle
+        from business
+        <where>
+            <if test="title != null and title != ''">
+                title like CONCAT('%',#{title},'%')
+            </if>
+        </where>
+    </select>
+
+</mapper>

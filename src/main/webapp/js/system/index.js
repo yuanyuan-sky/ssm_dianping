@@ -57,7 +57,7 @@ function clickMenu(element,id) {
  */
 function clickSubMenu(element,path) {
 	// 将其他有[选中样式]的节点的样式清空
-	$("#subMenuDiv").find(".on").attr("class","");
+	$(".ileft").find(".on").attr("class","");
 	// 将当前单击的节点置为[选中样式]
 	$(element).children().attr("class","on");
 	// 按指定地址加载主页面(iframe)
