@@ -1,6 +1,7 @@
 <%@ tag language="java" pageEncoding="UTF-8" %>
 <%@ attribute type="study_ssm_dianping.bean.Page" name="page" required="true" %>
 <%@ attribute type="java.lang.String" name="jsMethodName" required="true" %>
+<%@ attribute type="java.lang.String" name="objName" required="true" %>
 
 <script type="text/javascript">
     function transCurrentPage(currentPage) {
@@ -8,7 +9,7 @@
         if(!rule.test(currentPage)) {
             currentPage = 1;
         }
-        eval("adjs.${jsMethodName}(currentPage)");
+        eval("${objName}.${jsMethodName}(currentPage)");
     }
 
 </script>

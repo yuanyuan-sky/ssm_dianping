@@ -7,10 +7,7 @@ var adjs={
         removeUrl: "/ad/remove/",
         modifyInitUrl: "/ad/modifyInit/"
     },
-    search : function (currentPage) {
-        $("#currentPage").val(currentPage);
-        $("#mainForm").submit();
-    },
+
     remove:function (id) {
         $("#id").val(id);
         var basePath = $("#basePath").val();
@@ -22,5 +19,11 @@ var adjs={
         var basePath = $("#basePath").val();
         $("#mainForm").attr("action", basePath + adjs.URL.modifyInitUrl + id);
         $("#mainForm").submit();
+    },
+    search: function (currentPage) {
+        $("#currentPage").val(currentPage);
+        $("#mainForm").submit();
     }
 }
+
+

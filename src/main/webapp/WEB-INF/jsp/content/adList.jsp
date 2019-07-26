@@ -19,6 +19,7 @@
 			<input type="hidden" id="id" name="id"/>
 			<input type="hidden" id="message" value="${pageCode.msg}"/>
 			<input type="hidden" id="basePath" value="${basePath}"/>
+			<input type="hidden" name="_method" value="DELETE"/>
 			<input type="hidden" name="page.currentPage" id="currentPage" value="1"/>
 			<div class="right">
 				<div class="current">当前位置：<a href="#">内容管理</a> &gt; 广告管理</div>
@@ -67,7 +68,7 @@
 							</tbody>
 						</table>
 						<!-- 分页 -->
-						<t:page jsMethodName="search" page="${searchParam.page}"></t:page>
+						<t:page objName="adjs" jsMethodName="search" page="${searchParam.page}"></t:page>
 
 					</div>
 				</div>

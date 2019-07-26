@@ -54,7 +54,7 @@ public class AdController {
         return "/content/adAdd";
     }
 
-    @RequestMapping("/remove/{id}")
+    @RequestMapping(value = "/remove/{id}")
     public String remove(@PathVariable("id") int id, Model model) {
         boolean result = service.remove(id);
         if (result) {
@@ -62,7 +62,6 @@ public class AdController {
         }else {
             model.addAttribute(PageCodeEnum.KEY, PageCodeEnum.DEL_FAIL);
         }
-
         return "forward:/ad/adListInit";
     }
 

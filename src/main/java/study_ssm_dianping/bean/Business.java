@@ -19,7 +19,7 @@ public class Business extends BaseBean {
 
     private Integer distance;
 
-    private Integer mumber;
+    private Integer number;
 
     private String desc;
 
@@ -84,11 +84,11 @@ public class Business extends BaseBean {
     }
 
     public Integer getMumber() {
-        return mumber;
+        return number;
     }
 
     public void setMumber(Integer mumber) {
-        this.mumber = mumber;
+        this.number = mumber;
     }
 
     public String getDesc() {

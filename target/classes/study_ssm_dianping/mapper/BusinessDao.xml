@@ -3,15 +3,81 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="study_ssm_dianping.dao.BusinessDao">
+    <resultMap id="BusinessResultMap" type="Business">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="subtitle" property="subtitle"/>
+        <association property="cityDic" javaType="Dic">
+            <result column="city_name" property="name"/>
+        </association>
+        <association property="categoryDic" javaType="Dic">
+            <result column="category_name" property="name"/>
+        </association>
+    </resultMap>
 
-    <select id="searchByPage" parameterType="Business" resultType="Business">
-        select title,subtitle
-        from business
+    <select id="searchByPage" parameterType="Business" resultMap="BusinessResultMap">
+        select b.id,b.title,b.subtitle,d_city.name city_name,d_category.name category_name
+        from
+        business b left join dic d_city on b.city = d_city.code and d_city.type = '${@study_ssm_dianping.constant.DicTypeConst@CITY}'
+        left join dic d_category on b.category = d_category.code and d_category.type = '${@study_ssm_dianping.constant.DicTypeConst@CATEGORY}'
         <where>
             <if test="title != null and title != ''">
                 title like CONCAT('%',#{title},'%')
             </if>
         </where>
     </select>
+    <select id="getCitys" resultType="Dic">
+        select type, code, name, weight
+        from dic
+        where type = #{city};
+    </select>
+
+    <select id="getCategorys" resultType="Dic">
+        select type, code, name, weight
+        from dic
+        where type = #{category};
+    </select>
+
+    <insert id="businessAdd" parameterType="Business">
+        insert into business(img_file_name, title, subtitle, price, distance, `desc`, city, category)
+        values (#{imgFileName},#{title},#{subtitle},#{price},#{distance},#{desc},#{city},#{category})
+    </insert>
+    <select id="selectById" resultType="Business">
+        select id,
+               title,
+               img_file_name,
+               subtitle,
+               price,
+               distance,
+               `desc`,
+               city,
+               category
+        from business
+        where id = #{id};
+
+    </select>
+    
+    <update id="modify" parameterType="Business">
+        update business
+        <set>
+            title = #{title},
+            subtitle = #{subtitle},
+            city = #{city},
+            category = #{category},
+            price = #{price},
+            distance = #{distance},
+            `desc` = #{desc},
+            <if test="imgFileName != null and imgFileName!= ''">
+                img_file_name = #{imgFileName}
+            </if>
+        </set>
+        where  id = #{id}
+    </update>
+
+    <delete id="delete">
+        delete
+        from business
+        where id = #{id};
+    </delete>
 
 </mapper>

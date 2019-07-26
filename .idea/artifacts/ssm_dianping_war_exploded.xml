@@ -28,13 +28,13 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:4.2.3.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-tx:4.2.3.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-web:4.2.3.RELEASE" />
-          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.8" />
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:4.2.3.RELEASE" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.8" />
           <element id="library" level="project" name="Maven: taglibs:standard:1.1.2" />
-          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.9.0" />
           <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.6.1" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.15" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.3.0" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.3.3" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="ssm_dianping/web/Web" />
