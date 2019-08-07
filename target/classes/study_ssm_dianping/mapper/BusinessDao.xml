@@ -79,5 +79,25 @@
         from business
         where id = #{id};
     </delete>
+    <select id="selectLikeByPage" parameterType="Business" resultType="Business">
+        select id,img_file_name,title,subtitle,price,distance,number,`desc`,city,category,star_total_num,comment_total_num
+        from business
+        <where>
+            <if test="title != null and title != '' and subtitle != null and subtitle != '' and desc != null and desc != ''" >
+                and (
+                title like concat('%',#{title},'%') or
+                subtitle like concat('%',#{subtitle},'%') or
+                `desc` like concat('%',#{desc},'%')
+                )
+            </if>
+            <if test="city != null and city != ''">
+                and city = #{city}
+            </if>
+            <if test="category != null and category != ''">
+                and category = #{category}
+            </if>
+        </where>
+        order by id
+    </select>
 
 </mapper>

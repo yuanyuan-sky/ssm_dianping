@@ -83,12 +83,12 @@ public class Business extends BaseBean {
         this.distance = distance;
     }
 
-    public Integer getMumber() {
+    public Integer getNumber() {
         return number;
     }
 
-    public void setMumber(Integer mumber) {
-        this.number = mumber;
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 
     public String getDesc() {

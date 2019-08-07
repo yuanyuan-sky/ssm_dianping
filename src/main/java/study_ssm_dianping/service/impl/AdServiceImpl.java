@@ -8,7 +8,7 @@ import study_ssm_dianping.bean.Ad;
 import study_ssm_dianping.dao.AdDao;
 import study_ssm_dianping.dto.AdDto;
 import study_ssm_dianping.service.AdService;
-import study_ssm_dianping.util.MyUtil;
+import study_ssm_dianping.util.FileUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,7 +39,7 @@ public class AdServiceImpl implements AdService {
         ad.setWeight(adDto.getWeight());
         if (adDto.getImgFile() != null && adDto.getImgFile().getSize() > 0) {
             try {
-                String fileName =  MyUtil.saveImg(adDto.getImgFile(), adImageSavePath);
+                String fileName =  FileUtil.saveImg(adDto.getImgFile(), adImageSavePath);
                 ad.setImgFileName(fileName);
                 adDao.insert(ad);
                 return true;
@@ -92,7 +92,7 @@ public class AdServiceImpl implements AdService {
         String imgName = "";
         if (adDto.getImgFile() != null && adDto.getImgFile().getSize() > 0) {
             try {
-                imgName = MyUtil.saveImg(adDto.getImgFile(), adImageSavePath);
+                imgName = FileUtil.saveImg(adDto.getImgFile(), adImageSavePath);
                 ad.setImgFileName(imgName);
                 adDto.setImg(adImageUrl+imgName);
             } catch (IOException e) {

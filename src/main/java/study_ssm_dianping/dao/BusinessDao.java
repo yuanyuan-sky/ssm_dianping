@@ -19,4 +19,6 @@ public interface BusinessDao {
     int modify(Business business);
 
     int delete(Long id);
+
+    List<Business> selectLikeByPage(Business businessForSelect);
 }

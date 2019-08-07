@@ -8,7 +8,7 @@ import java.io.IOException;
 /**
  * Create By yuanyuan on 2019/7/20 16:43
  */
-public class MyUtil {
+public class FileUtil {
 
     public static String saveImg(MultipartFile multipartFile,String imgSavePath) throws IOException {
         String fileName = System.currentTimeMillis()
@@ -24,4 +24,5 @@ public class MyUtil {
 
         return fileName;
     }
+
 }

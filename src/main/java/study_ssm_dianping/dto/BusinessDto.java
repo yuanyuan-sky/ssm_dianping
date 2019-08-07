@@ -44,12 +44,10 @@ public class BusinessDto extends Business {
         this.keyword = keyword;
     }
 
-    @Override
     public Integer getMumber() {
         return mumber;
     }
 
-    @Override
     public void setMumber(Integer mumber) {
         this.mumber = mumber;
     }

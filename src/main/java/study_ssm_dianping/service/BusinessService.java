@@ -2,6 +2,7 @@ package study_ssm_dianping.service;
 
 import study_ssm_dianping.bean.Dic;
 import study_ssm_dianping.dto.BusinessDto;
+import study_ssm_dianping.dto.BusinessListDto;
 
 import java.util.List;
 
@@ -19,4 +20,6 @@ public interface BusinessService {
     boolean modify(BusinessDto businessDto);
 
     boolean delete(Long id);
+
+    BusinessListDto searchByPageForApi(BusinessDto businessDto);
 }
