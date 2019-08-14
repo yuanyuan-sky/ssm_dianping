@@ -1,11 +1,14 @@
 package study_ssm_dianping.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Create By yuanyuan on 2019/8/7 16:45
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class BusinessListDto {
 
     private boolean hasMore;

@@ -18,4 +18,14 @@ public class CommonUtil {
         return false;
     }
 
+    /**
+     * 生成指定位数的随机数
+     * @param n 位数
+     * @return 随机整数
+     */
+    public static int random(int n) {
+        int m = (int) ((Math.random() * 9 + 1) * Math.pow(10, n - 1));
+        return m;
+    }
+
 }

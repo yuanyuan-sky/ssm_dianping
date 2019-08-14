@@ -2,15 +2,16 @@ package study_ssm_dianping.controller.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import study_ssm_dianping.constant.ApiCodeEnum;
 import study_ssm_dianping.dto.AdDto;
+import study_ssm_dianping.dto.ApiCodeDto;
 import study_ssm_dianping.dto.BusinessDto;
 import study_ssm_dianping.dto.BusinessListDto;
 import study_ssm_dianping.service.AdService;
 import study_ssm_dianping.service.BusinessService;
+import study_ssm_dianping.service.MemberService;
+import study_ssm_dianping.util.CommonUtil;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -31,6 +32,9 @@ public class ApiController {
 
     @Autowired
     private BusinessService businessService;
+
+    @Autowired
+    private MemberService memberService;
 
     @Value("${ad.number}")
     private int adNumber;
@@ -87,10 +91,39 @@ public class ApiController {
         return businessService.searchByPageForApi(businessDto);
     }
 
+    /**
+     * 商户详情
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/detail/info/{id}",method = RequestMethod.GET)
     public BusinessDto detail(@PathVariable("id") Integer id) {
         BusinessDto businessDto = businessService.modifyInit(id);
         return businessDto;
+    }
+
+    @RequestMapping(value = "/sms",method = RequestMethod.POST)
+    public ApiCodeDto sms(@RequestParam("username") Long username){
+        ApiCodeDto dto;
+        //1、 验证用户手机号是否存在（是否注册过）
+        if (memberService.exists(username)) {
+            //2、生成六位随机数
+            String code = String.valueOf(CommonUtil.random(6));
+            //3、保存手机号与对应的md5（6为随机）（一般保存一分钟，1分钟后失效）
+            if (memberService.saveCode(username, code)) {
+                //4、调用短信通道，将明文6位随机数发送到对应的手机上
+                if (memberService.sendCode(username, code)) {
+                    dto = new ApiCodeDto(ApiCodeEnum.SUCCESS.getErrno(), code);
+                } else {
+                    dto = new ApiCodeDto(ApiCodeEnum.SEND_FAIL);
+                }
+            } else {
+                dto = new ApiCodeDto(ApiCodeEnum.REPEAT_REQUEST);
+            }
+        } else {
+            dto = new ApiCodeDto(ApiCodeEnum.USER_NOT_EXISTS);
+        }
+        return dto;
     }
 
     //@ResponseBody

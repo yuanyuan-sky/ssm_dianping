@@ -43,3 +43,21 @@ create table `dic`(
 `weight` int(11) default null,
 primary key (`type`,`code`)
 )engine = InnoDB charset = UTF8MB4;
+
+-- ----------------------------
+-- Table structure for member
+-- ----------------------------
+drop table if exists `member`;
+create table `member`
+(
+    `id`       int         not null comment '编号',
+    `phone`    bigint(13)  not null comment '手机号',
+    `name`     varchar(36) not null comment '用户名',
+    `password` varchar(32) not null comment '密码',
+    primary key (`id`),
+    unique key `phone_unique` (`phone`),
+    unique key `name_unique` (`name`)
+) engine = InnoDB charset = UTF8MB4;
+
+
+
