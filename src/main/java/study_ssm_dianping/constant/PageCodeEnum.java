@@ -27,4 +27,12 @@ public enum PageCodeEnum {
         return msg;
     }
 
+    public static PageCodeEnum getPageCodeEnumByCode(Integer code) {
+        for (PageCodeEnum item:PageCodeEnum.values()) {
+            if (item.code.equals(code)) {
+                return item;
+            }
+        }
+        return null;
+    }
 }

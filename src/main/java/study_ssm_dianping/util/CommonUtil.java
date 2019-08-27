@@ -1,5 +1,7 @@
 package study_ssm_dianping.util;
 
+import java.util.UUID;
+
 /**
  * 通用工具类
  * Create By yuanyuan on 2019/8/7 17:10
@@ -28,4 +30,12 @@ public class CommonUtil {
         return m;
     }
 
+    /**
+     * 获取UUID
+     * @return 获取UUID
+     */
+    public static String getUUID() {
+        UUID uuid = UUID.randomUUID();
+        return uuid.toString().replace("-", "");
+    }
 }

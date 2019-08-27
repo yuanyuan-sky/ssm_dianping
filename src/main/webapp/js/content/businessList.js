@@ -8,8 +8,9 @@ var business={
         addInit:"/business/addInit",
         DELETE_URL:"/business/"
     },
-    search: function () {
+    search: function (currentPage) {
         $("#mainForm").attr("method", "GET");
+        $("#currentPage").val(currentPage);
         $("#mainForm").attr("action", $("#basePath").val() + business.URL.listUrl);
         $("#mainForm").submit();
     },

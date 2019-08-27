@@ -5,6 +5,5 @@ import study_ssm_dianping.bean.Member;
 import java.util.List;
 
 public interface MemberDao {
-
-    List<Member> select(Long phone);
+    List<Member> getByPhone(Member member);
 }

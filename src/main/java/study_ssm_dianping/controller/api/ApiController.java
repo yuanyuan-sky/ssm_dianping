@@ -126,6 +126,29 @@ public class ApiController {
         return dto;
     }
 
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    public ApiCodeDto login(@RequestParam("username") Long userName, @RequestParam("code") String code) {
+        ApiCodeDto dto;
+        //  1、用手机号取出保存的md5（6位随机数），能取到，并且与提交上来的code值相同为校验通过
+        String saveCode = memberService.getCode(userName);
+        if (saveCode != null) {
+            if (saveCode.equals(code)) {
+                //2.如果校验通过，生成一个32位的token
+                String token = CommonUtil.getUUID();
+                //3、保存手机号与对应的token（一般这个手机号中途没有与服务端交互的情况下，保持10分钟）
+                memberService.saveToken(token, userName);
+                // 4、将这个token返回给前端
+                dto = new ApiCodeDto(ApiCodeEnum.SUCCESS);
+                dto.setToken(token);
+            } else {
+                dto = new ApiCodeDto(ApiCodeEnum.CODE_ERROR);
+            }
+        } else {
+            dto = new ApiCodeDto(ApiCodeEnum.CODE_INVALID);
+        }
+        return dto;
+    }
+
     //@ResponseBody
     @RequestMapping(value = "/submitComment",method = RequestMethod.POST)
     public Map<String, Object> submitComment() throws IOException {

@@ -6,4 +6,8 @@ public interface MemberService {
     boolean saveCode(Long username, String code);
 
     boolean sendCode(Long username, String code);
+
+    String getCode(Long userName);
+
+    void saveToken(String token, Long userName);
 }

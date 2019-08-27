@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import study_ssm_dianping.bean.Member;
 import study_ssm_dianping.cache.CodeCache;
+import study_ssm_dianping.cache.TokenCache;
 import study_ssm_dianping.dao.MemberDao;
 import study_ssm_dianping.service.MemberService;
 import study_ssm_dianping.util.MD5Util;
@@ -23,7 +24,7 @@ public class MemberServiceImpl implements MemberService {
     public boolean exists(Long phone) {
         Member member = new Member();
         member.setPhone(phone);
-        List<Member> list = memberDao.select(phone);
+        List<Member> list = memberDao.getByPhone(member);
         return list != null && list.size() == 1;
     }
 
@@ -40,4 +41,15 @@ public class MemberServiceImpl implements MemberService {
         return true;
     }
 
+    @Override
+    public String getCode(Long userName) {
+        CodeCache instance = CodeCache.getInstance();
+        return instance.getCode(userName);
+    }
+
+    @Override
+    public void saveToken(String token, Long userName) {
+        TokenCache cache = TokenCache.getInstance();
+        cache.save(token, userName);
+    }
 }
